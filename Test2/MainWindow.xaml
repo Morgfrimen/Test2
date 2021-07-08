@@ -11,7 +11,7 @@
             <DataGrid x:Name="UsersGrid" Height="375" Width="550" CanUserAddRows="True" />
         </StackPanel>
 
-        <StackPanel Margin="0,10,10,240" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="215">
+        <StackPanel Margin="0,50,10,190" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="215">
             <Label Content="Имя"></Label>
             <TextBox x:Name="txtName"></TextBox>
             <Label Content="Фамилия"></Label>
@@ -22,10 +22,10 @@
             <TextBox x:Name="txtPhone" ></TextBox>
 
         </StackPanel>
-        <TextBox x:Name="txtDelet" Margin="596,277,150,134"/>
-        <Button x:Name="AddUser" Margin="575,205,128,196" Content="Добавить" Click="Button_Click1" />
-        <Button x:Name="DeleteUser" Margin="682,272,18,129" Content="Удалить по ID" Click="Button_Click2" />
-        <Button x:Name="ChangeUser" Margin="692,205,10,196" Content="Изменить" Click="Button_Click3" />
+        <TextBox x:Name="txtDelet" Margin="574,10,172,401"/>
+        <Button x:Name="AddUser" Margin="575,250,128,151" Content="Добавить" Click="Button_Click1" />
+        <Button x:Name="DeleteUser" Margin="689,303,11,98" Content="Удалить по ID" Click="Button_Click2" />
+        <Button x:Name="ChangeUser" Margin="690,250,12,151" Content="Изменить" Click="Button_Click4" />
         <Button x:Name="Clean" Margin="707,391,0,10" Content="Очистить" Click="Button_Click3" />
 
     </Grid>

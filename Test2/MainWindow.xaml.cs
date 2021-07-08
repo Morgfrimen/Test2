@@ -36,10 +36,11 @@ namespace Test2
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
             i++;
+            txtDelet.Text = i.ToString();
             XDocument xNewDoc = XDocument.Load(xmlFile);
             //Запись
             xNewDoc.Root.Add(new XElement("User",
-                new XElement("ID", i),
+                new XElement("ID", txtDelet.Text),
                 new XElement("Name", txtName.Text),
                 new XElement("Surname", txtSurname.Text),
                 new XElement("Otches", txtOtches.Text),
@@ -55,15 +56,29 @@ namespace Test2
         {
             XmlDocument xNewDoc = new XmlDocument();
             xNewDoc.Load(xmlFile);
-            var root = xNewDoc.SelectSingleNode("Users");
-            var tegId = root.SelectSingleNode("User[ID='3']");
+            
+            //Удалить хотя бы 3
 
-            root.RemoveChild(tegId);
+            XmlNodeList nodes = xNewDoc.SelectNodes("Users/User[@ID='3']");
+            for (int i = nodes.Count - 1; i >= 0; i--)
+            {
+                nodes[i].ParentNode.RemoveChild(nodes[i]);
+            }
 
             xNewDoc.Save("XmlFile1.xml");
 
             //Обновление
             obnovleniewpf();
+
+        }
+
+        //Запись юзера по номеру в лейбл и пересохранение его
+        private void Button_Click4(object sender, RoutedEventArgs e)
+        {
+            XmlDocument xNewDoc = new XmlDocument();
+            xNewDoc.Load(xmlFile);
+
+
 
         }
 
@@ -99,5 +114,7 @@ namespace Test2
             });
             UsersGrid.ItemsSource = result;
         }
+
+
     }
 }
