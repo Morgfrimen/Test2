@@ -38,7 +38,7 @@ namespace Test2
             i++;
             XDocument xNewDoc = XDocument.Load(xmlFile);
             //Запись
-            xNewDoc.Root.Add(new XElement("Cont",
+            xNewDoc.Root.Add(new XElement("User",
                 new XElement("ID", i),
                 new XElement("Name", txtName.Text),
                 new XElement("Surname", txtSurname.Text),
@@ -53,10 +53,15 @@ namespace Test2
         //Кнопка удаления строки из xml но не работает
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            XDocument sourceDoc = XDocument.Parse(@"<title>
-            </title>");
-            sourceDoc.Descendants("title").Where(x => (string)x.Element("ID") == (string)txtDelet.Text).Remove();
-            sourceDoc.Save(xmlFile);
+            XmlDocument xNewDoc = new XmlDocument();
+            xNewDoc.Load(xmlFile);
+            var root = xNewDoc.SelectSingleNode("Users");
+            var tegId = root.SelectSingleNode("User[ID='3']");
+
+            root.RemoveChild(tegId);
+
+            xNewDoc.Save("XmlFile1.xml");
+
             //Обновление
             obnovleniewpf();
 
@@ -66,8 +71,8 @@ namespace Test2
         private void Button_Click3(object sender, RoutedEventArgs e)
         {
             //Очистка
-            XDocument sourceDoc = XDocument.Parse(@"<title>
-            </title>");
+            XDocument sourceDoc = XDocument.Parse(@"<Users>
+            </Users>");
             var elementList = sourceDoc.Root.DescendantNodes().OfType<XText>();
             foreach (var element in elementList)
             {
@@ -84,7 +89,7 @@ namespace Test2
         public void obnovleniewpf()
         {
             XDocument xNewDoc = XDocument.Load(xmlFile);
-            var result = xNewDoc.Descendants("Cont").Select(x => new
+            var result = xNewDoc.Descendants("User").Select(x => new
             {
                 id = x.Element("ID").Value,
                 Name = x.Element("Name").Value,
